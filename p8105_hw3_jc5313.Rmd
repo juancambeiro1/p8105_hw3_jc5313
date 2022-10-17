@@ -141,4 +141,4 @@ accel_data  %>%
   geom_line() +
   labs(title = "24 hour activity time courses")
 ```
-
+In the above plot it is clear that activity levels are low in the early hours of the morning, presumably since this is when people are sleeping. Activity levels seem to be highest in the evening around 9PM. Activity levels do not seem to vary all that much by day of the week.
