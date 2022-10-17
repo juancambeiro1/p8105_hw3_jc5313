@@ -108,7 +108,8 @@ accel_data = read_csv("data/accel_data.csv") %>%
     names_prefix = "activity_") %>%
   mutate(
   weekday_vs_weekend = as.factor(ifelse(day == "Saturday" | day == "Sunday", "weekend", "weekday")),
-  day = as.factor(ordered(day, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satuday", "Sunday"))),
+  day = as.factor(ordered(day, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))),
   minutes = as.double(minutes))
 ```
+Description: This dataset contains `r nrow(accel_data)` observations and `r ncol(accel_data)` variables. Each observation is a minute of accelerometer data for the 63 year-old male over five weeks. The variables include: week ('week'), day ID ('day_id'), day of the week ('day'), minute ('minutes'), activity count per minute ('activity_count'), and whether it is on a weekday or weekend ('weekday_vs_weekend)
 
