@@ -152,13 +152,11 @@ First, I am loading the NOAA data.
 library(p8105.datasets)
 data("ny_noaa")
 ```
-Description: This dataset contains `r nrow(ny_noaa)` observations and `r ncol(ny_noaa)` variables. The variables include: weather station id (`id`), date of observation (`date`), precipitation (`prcp`), snowfall (`snow`), snow depth (`snwd`), maximum temperature (`tmax`), and minimum temperature (`tmin`). Missing data seems to be a significant issue, with a lot of missing precipitation (`prcp`) observations in particular.
+Description: This dataset contains `r nrow(ny_noaa)` observations and `r ncol(ny_noaa)` variables. The variables include: weather station id (`id`), date of observation (`date`), precipitation (`prcp`), snowfall (`snow`), snow depth (`snwd`), maximum temperature (`tmax`), and minimum temperature (`tmin`). Missing data seems to be a significant issue: for precipitation (`prcp`) there are `r sum(is.na(ny_noaa$prcp))` missing values, for snowfall (`snow`) there are `r sum(is.na(ny_noaa$snow))` missing values, for snow depth (`snwd`) there are `r sum(is.na(ny_noaa$snwd))` missing values, for maximum temperature (`tmax`) there are `r sum(is.na(ny_noaa$tmax))` missing values, and for minimum temperature (`tmin`) there are `r sum(is.na(ny_noaa$tmin))` missing values.
 
 #### Data cleaning
-Next, I am cleaning the data and I will create separate variables for year, month, and day using `separate`. Then, I will use `mutate` to get a 
-```{r}
-ny_noaa_cleaned = ny_noaa %>%
-```
+Next, I am cleaning the data and I will create separate variables for year, month, and day using `separate`. Then, I will use `mutate` to encode data with reasonable variable classes
+
 
 
 
