@@ -95,9 +95,9 @@ instacart %>%
 
 ### Problem 2
 
-#### Load, clean, tidy
+#### Load, clean, tidy, mutate
 
-Here I am loading the accelerometer data, cleaning it, and tidying it using `pivot_longer`.
+Here I am loading the accelerometer data, cleaning it, and tidying it using `pivot_longer`. Then, I am mutating the data using `mutate` so as to create a new 'weekday_vs_weekend' variable and to encode data with reasonable variable classes.
 ```{r}
 accel_data = read_csv("data/accel_data.csv") %>%
   janitor::clean_names() %>%
@@ -105,15 +105,10 @@ accel_data = read_csv("data/accel_data.csv") %>%
     activity_1:activity_1440,
     names_to = "minutes",
     values_to = "activity_count",
-    names_prefix = "activity_"
-  )
+    names_prefix = "activity_") %>%
+  mutate(
+  weekday_vs_weekend = as.factor(ifelse(day == "Saturday" | day == "Sunday", "weekend", "weekday")),
+  day = as.factor(ordered(day, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satuday", "Sunday"))),
+  minutes = as.double(minutes))
 ```
 
-#### Mutate
-Next I am mutating the data using `mutate` so as to create a new 'weekday_vs_weekend' variable and to encode data with reasonable variable classes.
-```{r}
-accel_mutated_data = mutate(accel_data,
-  weekday_vs_weekend = as.factor(ifelse(day == "Saturday", ifelse(day == "Sunday", "weekend", "weekday")),
-  day = as.factor(ordered(day, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satuday", "Sunday"))),
-  minutes = as.double(minutes)))
-```
