@@ -108,3 +108,12 @@ accel_data = read_csv("data/accel_data.csv") %>%
     names_prefix = "activity_"
   )
 ```
+
+#### Mutate
+Next I am mutating the data using `mutate` so as to create a new 'weekday_vs_weekend' variable and to encode data with reasonable variable classes.
+```{r}
+accel_mutated_data = mutate(accel_data,
+  weekday_vs_weekend = as.factor(ifelse(day == "Saturday", ifelse(day == "Sunday", "weekend", "weekday")),
+  day = as.factor(ordered(day, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satuday", "Sunday"))),
+  minutes = as.double(minutes)))
+```
