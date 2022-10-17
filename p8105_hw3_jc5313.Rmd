@@ -92,3 +92,19 @@ instacart %>%
   spread(key = order_dow, value = mean_hour) %>%
   knitr::kable(digits = 2)
 ```
+
+### Problem 2
+
+#### Load, clean, tidy
+
+Here I am loading the accelerometer data, cleaning it, and tidying it using `pivot_longer`.
+```{r}
+accel_data = read_csv("data/accel_data.csv") %>%
+  janitor::clean_names() %>%
+  pivot_longer(
+    activity_1:activity_1440,
+    names_to = "minutes",
+    values_to = "activity_count",
+    names_prefix = "activity_"
+  )
+```
