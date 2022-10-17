@@ -111,5 +111,18 @@ accel_data = read_csv("data/accel_data.csv") %>%
   day = as.factor(ordered(day, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))),
   minutes = as.double(minutes))
 ```
-Description: This dataset contains `r nrow(accel_data)` observations and `r ncol(accel_data)` variables. Each observation is a minute of accelerometer data for the 63 year-old male over five weeks. The variables include: week ('week'), day ID ('day_id'), day of the week ('day'), minute ('minutes'), activity count per minute ('activity_count'), and whether it is on a weekday or weekend ('weekday_vs_weekend)
+Description: This dataset contains `r nrow(accel_data)` observations and `r ncol(accel_data)` variables. Each observation is a minute of accelerometer data for the 63 year-old male over five weeks. The variables include: week (`week`), day ID (`day_id`), day of the week (`day`), minute (`minutes`), activity count per minute (`activity_count`), and whether it is on a weekday or weekend (`weekday_vs_weekend`).
 
+#### Aggregating across minutes to create total activity variable
+
+I will now use my tidied dataset to aggregate across minutes to create a total activity variable for each day, and create a table showing these totals.
+```{r}
+accel_data %>%
+  group_by(week, day) %>%
+  summarize(total_activity = sum(activity_count)) %>%
+  pivot_wider(
+    names_from = "day",
+    values_from = "total_activity") %>%
+  knitr::kable()
+```
+Above we can see a table showing the totals for each day.
